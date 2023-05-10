@@ -2,6 +2,11 @@
 
 ## Topic: 3D Scene/Object Reconstruction using CycleGANs with Binocular Stereopsis ##
 
+### Group Members ###
+- Aditya Vikram Singh ([avsingh@umass.edu](mailto:avsingh@umass.edu))
+- Robert Washbourne ([rwashbourne@umass.edu](mailto:rwashbourne@umass.edu))
+- Rohan Raghuram ([rraghuram@umass.edu](mailto:rraghuram@umass.edu))
+
 ### Generating Stereoscopic Renders via Depth Renderer on ShapeNet subset ###
 
 | Object Class | Stereo Pair 1 Left Image | Stereo Pair 1 Right Image | Stereo Pair 2 Left Image | Stereo Pair 2 Right Image |
