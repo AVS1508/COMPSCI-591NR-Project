@@ -15,10 +15,10 @@
 
 | Input Image (Left) | Input Image (Right) | Generated Depth Map |
 |--------------------|---------------------|---------------------|
-| ![bed_1_left](./src/images/bed_1_left.png) | ![bed_1_right](./src/images/bed_1_right.png) | ![bed_1_disparity](./src/images/bed_1_disparity.png) |
-| ![bed_2_left](./src/images/bed_2_left.png) | ![bed_2_right](./src/images/bed_2_right.png) | ![bed_2_disparity](./src/images/bed_2_disparity.png) |
-| ![chair_1_left](./src/images/chair_1_left.png) | ![chair_1_right](./src/images/chair_1_right.png) | ![chair_1_disparity](./src/images/chair_1_disparity.png) |
-| ![chair_2_left](./src/images/chair_2_left.png) | ![chair_2_right](./src/images/chair_2_right.png) | ![chair_2_disparity](./src/images/chair_2_disparity.png) |
+| ![bed_1_left](./src/images/bed_1_left.png) | ![bed_1_right](./src/images/bed_1_right.png) | ![bed_1_disparity](./src/images/bed_1_depth.png) |
+| ![bed_2_left](./src/images/bed_2_left.png) | ![bed_2_right](./src/images/bed_2_right.png) | ![bed_2_disparity](./src/images/bed_2_depth.png) |
+| ![chair_1_left](./src/images/chair_1_left.png) | ![chair_1_right](./src/images/chair_1_right.png) | ![chair_1_disparity](./src/images/chair_1_depth.png) |
+| ![chair_2_left](./src/images/chair_2_left.png) | ![chair_2_right](./src/images/chair_2_right.png) | ![chair_2_disparity](./src/images/chair_2_depth.png) |
 
 ## References and Works Used ##
 
