@@ -19,3 +19,38 @@
 | ![bed_2_left](./src/images/bed_2_left.png) | ![bed_2_right](./src/images/bed_2_right.png) | ![bed_2_disparity](./src/images/bed_2_disparity.png) |
 | ![chair_1_left](./src/images/chair_1_left.png) | ![chair_1_right](./src/images/chair_1_right.png) | ![chair_1_disparity](./src/images/chair_1_disparity.png) |
 | ![chair_2_left](./src/images/chair_2_left.png) | ![chair_2_right](./src/images/chair_2_right.png) | ![chair_2_disparity](./src/images/chair_2_disparity.png) |
+
+## References and Works Used ##
+
+1. [Depth_Renderer](https://github.com/yinyunie/depth_renderer)
+
+    ```bibtex
+    @inproceedings{
+        NEURIPS2020_ba036d22,
+        author = {Nie, Yinyu and Lin, Yiqun and Han, Xiaoguang and Guo, Shihui and Chang, Jian and Cui, Shuguang and Zhang, Jian.J},
+        booktitle = {Advances in Neural Information Processing Systems},
+        editor = {H. Larochelle and M. Ranzato and R. Hadsell and M. F. Balcan and H. Lin},
+        pages = {16119--16130},
+        publisher = {Curran Associates, Inc.},
+        title = {Skeleton-bridged Point Completion: From Global Inference to Local Adjustment},
+        url = {https://proceedings.neurips.cc/paper/2020/file/ba036d228858d76fb89189853a5503bd-Paper.pdf},
+        volume = {33},
+        year = {2020}
+    }
+    ```
+
+2. [GenRen](https://github.com/SamsungLabs/genren)
+
+    ```bibtex
+    @inproceedings{
+        9320324,
+        author={Aumentado-Armstrong, Tristan and Levinshtein, Alex and Tsogkas, Stavros and Derpanis, Konstantinos G. and Jepson, Allan D.},
+        booktitle={2020 International Conference on 3D Vision (3DV)}, 
+        title={Cycle-Consistent Generative Rendering for 2D-3D Modality Translation}, 
+        year={2020},
+        volume={},
+        number={},
+        pages={230-240},
+        doi={10.1109/3DV50981.2020.00033}
+        }
+    ```
