@@ -1,0 +1,3 @@
+[submodule "depth_renderer"]
+	path = depth_renderer
+	url = https://github.com/AVS1508/depth_renderer
