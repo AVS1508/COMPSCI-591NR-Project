@@ -1,3 +1,4 @@
+import math
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -18,10 +19,14 @@ for obj in ['bed', 'chair']:
         disparity = stereo.compute(left_image, right_image)
 
         # Normalize the disparity values for visualization
-        disparity_normalized = cv2.normalize(disparity, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+        # disparity_normalized = cv2.normalize(disparity, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+        
+        # Create depth map using parameters from the camera (depth_renderer)
+        baseline, focus = 1.0, 1.2 * math.sqrt(3)
+        depth = baseline * focus / disparity
 
         # Display the disparity map
         plt.figure(figsize=(5.12, 5.12))
-        plt.imshow(disparity_normalized, cmap='gray')
-        plt.savefig(f'./images/{obj}_{idx}_disparity.png')
+        plt.imshow(depth, cmap='gray')
+        plt.savefig(f'./images/{obj}_{idx}_depth.png')
         plt.show()
