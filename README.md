@@ -3,6 +3,7 @@
 ## Topic: 3D Scene/Object Reconstruction using CycleGANs with Binocular Stereopsis ##
 
 ### Group Members ###
+
 - Aditya Vikram Singh ([avsingh@umass.edu](mailto:avsingh@umass.edu))
 - Robert Washbourne ([rwashbourne@umass.edu](mailto:rwashbourne@umass.edu))
 - Rohan Raghuram ([rraghuram@umass.edu](mailto:rraghuram@umass.edu))
@@ -18,12 +19,12 @@
 
 ### Generating Depth/Disparity Map from Pair of Steroscopic Images ###
 
-| Input Image (Left) | Input Image (Right) | Generated Depth Map |
-|--------------------|---------------------|---------------------|
-| ![bed_1_left](./src/images/bed_1_left.png) | ![bed_1_right](./src/images/bed_1_right.png) | ![bed_1_disparity](./src/images/bed_1_depth.png) |
-| ![bed_2_left](./src/images/bed_2_left.png) | ![bed_2_right](./src/images/bed_2_right.png) | ![bed_2_disparity](./src/images/bed_2_depth.png) |
-| ![chair_1_left](./src/images/chair_1_left.png) | ![chair_1_right](./src/images/chair_1_right.png) | ![chair_1_disparity](./src/images/chair_1_depth.png) |
-| ![chair_2_left](./src/images/chair_2_left.png) | ![chair_2_right](./src/images/chair_2_right.png) | ![chair_2_disparity](./src/images/chair_2_depth.png) |
+| Input Image (Left) | Input Image (Right) | Generated Depth Map | RGB-SD Image |
+|--------------------|---------------------|---------------------|--------------|
+| ![bed_1_left](./src/images/bed_1_left.png) | ![bed_1_right](./src/images/bed_1_right.png) | ![bed_1_disparity](./src/images/bed_1_depth.png) | ![bed_1_rgbsd](./src/images/bed_1_rgbsd.png) |
+| ![bed_2_left](./src/images/bed_2_left.png) | ![bed_2_right](./src/images/bed_2_right.png) | ![bed_2_disparity](./src/images/bed_2_depth.png) | ![bed_2_rgbsd](./src/images/bed_2_rgbsd.png) |
+| ![chair_1_left](./src/images/chair_1_left.png) | ![chair_1_right](./src/images/chair_1_right.png) | ![chair_1_disparity](./src/images/chair_1_depth.png) | ![chair_1_rgbsd](./src/images/chair_1_rgbsd.png) |
+| ![chair_2_left](./src/images/chair_2_left.png) | ![chair_2_right](./src/images/chair_2_right.png) | ![chair_2_disparity](./src/images/chair_2_depth.png) | ![chair_2_rgbsd](./src/images/chair_2_rgbsd.png) |
 
 ## References and Works Used ##
 
