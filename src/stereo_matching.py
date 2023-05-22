@@ -2,8 +2,11 @@ import math
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+from skimage.metrics import structural_similarity as compute_ssim
 
-for obj in ['bed', 'chair']:
+metrics = dict()
+for obj in ['bed', 'chair', 'planes', 'cabinets']:
     for idx in range(1, 3):
         # Load the left and right images of the stereoscopic pair
         left_image_rgb = cv2.imread(f'./images/{obj}_{idx}_left.png', cv2.IMREAD_COLOR)
@@ -29,11 +32,10 @@ for obj in ['bed', 'chair']:
         # Compute the normalized depth map (using offset for amenable clipping of occluded regions of the image at 50%+ gray)
         depth_normalized = cv2.normalize(depth, None, 128, 255, cv2.NORM_MINMAX) + 127
 
-        # Display the depth map
+        # Save the depth map
         plt.figure(figsize=(5.12, 5.12))
         plt.imshow(depth_normalized, cmap='gray')
         plt.savefig(f'./images/{obj}_{idx}_depth.png')
-        # plt.show()
 
         # Create the 4-channel RGB-SD image
         rgb_sd_image = np.zeros((left_image_rgb.shape[0], left_image_rgb.shape[1], 4), dtype=np.uint8)
@@ -43,10 +45,41 @@ for obj in ['bed', 'chair']:
         # Save the resulting image
         cv2.imwrite(f'./images/{obj}_{idx}_rgbsd.png', rgb_sd_image)
         
-        # Load the ground truth depth map
-        ground_truth_depth = cv2.imread(f'./images/{obj}_{idx}_depth.png', cv2.IMREAD_GRAYSCALE)
+        ground_truth_rgb_image_normed = cv2.normalize(cv2.imread(f'./images/{obj}_{idx}_right.png', cv2.IMREAD_UNCHANGED), None, 0, 1, cv2.NORM_MINMAX)
+        ground_truth_depth_map_normed = cv2.normalize(cv2.imread(f'./images/{obj}_{idx}_depth.png', cv2.IMREAD_UNCHANGED)[:, :, 3], None, 0, 1, cv2.NORM_MINMAX)
+        generated_rgbsd_image_color_normed = cv2.normalize(cv2.imread(f'./images/{obj}_{idx}_rgbsd.png', cv2.IMREAD_UNCHANGED)[:, :, :3], None, 0, 1, cv2.NORM_MINMAX)
+        generated_rgbsd_image_depth_normed = cv2.normalize(cv2.imread(f'./images/{obj}_{idx}_rgbsd.png', cv2.IMREAD_UNCHANGED)[:, :, 3], None, 0, 1, cv2.NORM_MINMAX)
         
-        # Compute the mean squared error (MSE)
-        mse = np.mean((cv2.normalize(depth_normalized.astype(np.float32), None, 0, 1, cv2.NORM_MINMAX) - cv2.normalize(ground_truth_depth.astype(np.float32), None, 0, 1, cv2.NORM_MINMAX))**2)
+        # Compute the PSNRs
+        mses = [np.mean((ground_truth_rgb_image_normed - generated_rgbsd_image_color_normed) ** 2), np.mean((ground_truth_depth_map_normed - generated_rgbsd_image_depth_normed) ** 2)]
+        psnrs = [20 * np.log10(1.0 / np.sqrt(mses[0])), 20 * np.log10(1.0 / np.sqrt(mses[1]))] 
 
-        print(f"Mean Squared Error (MSE): {mse}")
+        # Compute the SSIMs
+        ssims = compute_ssim(ground_truth_rgb_image_normed, generated_rgbsd_image_color_normed, channel_axis=2), compute_ssim(ground_truth_depth_map_normed, generated_rgbsd_image_depth_normed)
+
+        # Compute the ARDs (assuming both images have the same dimensions)
+        ards = [
+            np.mean(np.abs(ground_truth_rgb_image_normed - generated_rgbsd_image_color_normed) / (ground_truth_rgb_image_normed + np.finfo(np.float32).eps)),
+            np.mean(np.abs(ground_truth_depth_map_normed - generated_rgbsd_image_depth_normed) / (ground_truth_depth_map_normed + np.finfo(np.float32).eps))
+        ]
+
+        
+        metrics[obj] = {
+            'MSE_RGB': mses[0],
+            'MSE_DEPTH': mses[1],
+            'PSNR_RGB': psnrs[0],
+            'PSNR_DEPTH': psnrs[1],
+            'SSIM_RGB': ssims[0],
+            'SSIM_DEPTH': ssims[1],
+            'ARD_RGB': ards[0],
+            'ARD_DEPTH': ards[1]
+        }
+
+        # Print the computed metrics
+        print(f"Mean Squared Error (MSE)            with {obj:10s} for (i) RGB Map= {mses[0]:.5f} and (ii) Depth Map= {mses[1]:.5f}")
+        print(f"Peak Signal-to-Noise Ratio (PSNR)   with {obj:10s} for (i) RGB Map= {psnrs[0]:.5f} and (ii) Depth Map= {psnrs[1]:.5f}")
+        print(f"Absolute Relative Difference (ARD)  with {obj:10s} for (i) RGB Map= {ards[0]:.10e} and (ii) Depth Map= {ards[1]:.10e}")
+        print(f"Structural Similarity Index (SSIM)  with {obj:10s} for (i) RGB Map= {ssims[0]:.10e} and (ii) Depth Map= {ssims[1]:.10e}")
+
+metrics = pd.DataFrame(metrics)
+metrics.to_latex('./images/metrics.tex')
